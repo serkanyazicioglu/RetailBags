@@ -8,7 +8,7 @@
 
 * Simple addon which adds search and sort functionalities on backpack on top of original WoW UI.
 
-* Adds crafting reagent text to reagents and sell price to reagent and item tooltips.
+* Adds 'Crafting Reagent' label to reagents and sell price to reagent and item tooltips.
 
 * Adds quality and item level to weapon and armor tooltips.
 
@@ -16,7 +16,7 @@
 
 * Displays item quality borders
 
-* Ability to open all bags automatically when character pane opens. (Useful for handhelds and controllers).
+* Ability to open all bags automatically when character pane shows up. (Useful for handhelds and controllers).
 
 * Ability to scale bag container size independently from the UI scale.
 
