@@ -22,6 +22,7 @@ local f = CreateFrame("Frame");
 f:RegisterEvent('BANKFRAME_OPENED');
 f:RegisterEvent('PLAYERBANKSLOTS_CHANGED');
 f:RegisterEvent('INSPECT_READY');
+f:RegisterEvent('UNIT_INVENTORY_CHANGED');
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -42,6 +43,12 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 		RB:InitBank();
 	elseif event == "INSPECT_READY" then
 		RB:InitInspectInventory();
+	elseif event == "UNIT_INVENTORY_CHANGED" then
+		if (CharacterFrame:IsShown()) then
+			RB:InitInventory(CharacterFrame);
+		else
+			RB:InitInspectInventory();
+		end
 	end
 end)
 

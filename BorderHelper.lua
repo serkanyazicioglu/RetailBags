@@ -10,7 +10,7 @@ function CreateBorder(frame, slotFrameName, itemQuality, size)
 		f:SetBackdrop({
 			bgFile = "Interface/Tooltips/UI-Tooltip-Background",
 			edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-			edgeSize = 20
+			edgeSize = 17
 		});
 		f:SetBackdropColor(0, 0, 0, 0);
 		frame.RetailBagsBorder = f;
