@@ -6,7 +6,7 @@
 
 # Retail Bags Addon
 
-* Simple addon which adds search and sort functionalities on backpack on top of original WoW UI.
+* Simple addon which adds search and sort functionalities to backpack on top of original WoW UI.
 
 * Adds 'Crafting Reagent' and 'Max Stack' labels to reagent tooltips.
 
