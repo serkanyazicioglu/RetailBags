@@ -18,5 +18,6 @@ BagItemAutoSortButton.xml
 BankItemAutoSortButton.xml
 RetailBags.lua
 BorderHelper.lua
+InventoryFrameHelper.lua
 ContainerFrameHelper.lua
 Options.lua

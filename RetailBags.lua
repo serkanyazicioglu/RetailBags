@@ -21,6 +21,7 @@ RB.defaults = {
 local f = CreateFrame("Frame");
 f:RegisterEvent('BANKFRAME_OPENED');
 f:RegisterEvent('PLAYERBANKSLOTS_CHANGED');
+f:RegisterEvent('INSPECT_READY');
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -39,6 +40,8 @@ end)
 f:SetScript("OnEvent", function(self, event, arg1, arg2)
 	if event == "BANKFRAME_OPENED" or event == "PLAYERBANKSLOTS_CHANGED" then
 		RB:InitBank();
+	elseif event == "INSPECT_READY" then
+		RB:InitInspectInventory();
 	end
 end)
 
@@ -135,6 +138,8 @@ local function CharacterFrame_VisibilityCallback(frame)
 			CloseAllBags();
 		end
 	end
+
+	RB:InitInventory(frame);
 end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
