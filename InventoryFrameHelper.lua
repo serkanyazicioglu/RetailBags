@@ -39,8 +39,6 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
         local frame = _G[slotFrameName]
 
         if (frame) then
-            print(slotFrameName);
-
             if (not RB.DB.profile.displayItemQualityBorders) then
                 if (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
