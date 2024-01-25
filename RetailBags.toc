@@ -1,8 +1,8 @@
 ## Interface: 11500
 ## Title: Retail Bags
-## Notes: Retail bag functionalities for Classic
+## Notes: Retail bag functionalities for Classic Era
 ## Author: Nhea
-## Version: 1.0.0
+## Version: 1.0.1
 
 SortBags/SortBags.lua
 BagItemSearchBox.xml

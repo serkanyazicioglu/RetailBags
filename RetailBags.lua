@@ -45,7 +45,7 @@ RetailBags.Colors = {
 local function GameTooltip_OnTooltipSetItem(tooltip)
 	local _, link = tooltip:GetItem()
 	if not link then return; end
-	
+
 	local itemString = match(link, "item[%-?%d:]+")
 	local _, itemId = strsplit(":", itemString)
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID , setID, isCraftingReagent = GetItemInfo('item:' .. itemId);
@@ -74,4 +74,25 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 	end
 end
 
-GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem)
+GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+
+hooksecurefunc(WorldMapFrame, "Show", function(self)
+	if (CharacterFrame:IsShown()) then
+		HideUIPanel(CharacterFrame);
+	end
+
+	ShowUIPanel(WorldMapFrame);
+end);
+
+local function CharacterFrame_VisibilityCallback(frame)
+	HideUIPanel(WorldMapFrame);
+
+	if (frame:IsShown()) then
+		OpenAllBags();
+	else
+		CloseAllBags();
+	end
+end
+
+hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
+hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
