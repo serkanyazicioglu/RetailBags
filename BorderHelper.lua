@@ -1,19 +1,21 @@
 function CreateBorder(frame, slotFrameName, itemQuality, size)
 	if (not frame.RetailBagsBorder) then
 		if (not size) then
-			size = 68;
+			size = 43;
 		end
 
-		local border = frame:CreateTexture(slotFrameName .. 'Quality', 'OVERLAY');
-		border:SetTexture("Interface\\Buttons\\UI-ActionButton-Border");
-		border:SetBlendMode('ADD');
-		border:SetHeight(size);
-		border:SetWidth(size);
-		border:SetPoint('CENTER', frame, 'CENTER', 0, 1);
-		frame.RetailBagsBorder = border;
+		local f = CreateFrame("Frame", nil, frame, "BackdropTemplate");
+		f:SetPoint("CENTER", 0, -1);
+		f:SetSize(size, size);
+		f:SetBackdrop({
+			bgFile = "Interface/Tooltips/UI-Tooltip-Background",
+			edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+			edgeSize = 20
+		});
+		f:SetBackdropColor(0, 0, 0, 0);
+		frame.RetailBagsBorder = f;
 	end
 	local color = ITEM_QUALITY_COLORS[itemQuality];
-	frame.RetailBagsBorder:SetVertexColor(color.r, color.g, color.b);
-	frame.RetailBagsBorder:SetAlpha(0.425);
+	frame.RetailBagsBorder:SetBackdropBorderColor(color.r, color.g, color.b);
 	frame.RetailBagsBorder:Show();
 end
