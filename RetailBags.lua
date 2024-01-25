@@ -14,8 +14,13 @@ RB.defaults = {
 		displayTooltipItemLevel = true,
 		displayTooltipCraftingReagent = true,
 		displayTooltipVendorPrice = true,
+		displayItemQualityBorders = true
 	}
 }
+
+local f = CreateFrame("Frame");
+f:RegisterEvent('BANKFRAME_OPENED');
+f:RegisterEvent('PLAYERBANKSLOTS_CHANGED');
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -27,35 +32,15 @@ function RB:OnInitialize()
 	CONTAINER_SCALE = self.DB.profile.bagContainerScale;
 end
 
-hooksecurefunc("ContainerFrame_Update", function(self)
-	if ContainerFrame_IsBackpack(self:GetID()) then
-		BagItemSearchBox:SetParent(self);
-		BagItemSearchBox:ClearAllPoints();
-		BagItemSearchBox:SetPoint("TOPLEFT", self, "TOPLEFT", 50, -30)
-		BagItemSearchBox.anchorBag = self;
-
-		if (RB.DB.profile.displaySearchBox) then
-			BagItemSearchBox:Show();
-		end
-
-		BagItemAutoSortButton:SetParent(self);
-		BagItemAutoSortButton:SetPoint("TOPRIGHT", self, "TOPRIGHT", -9, -28);
-
-		if (RB.DB.profile.displaySortButton) then
-			BagItemAutoSortButton:Show();
-		end
-	elseif BagItemSearchBox.anchorBag == self then
-		BagItemSearchBox:ClearAllPoints();
-		BagItemSearchBox:Hide();
-		BagItemSearchBox.anchorBag = nil;
-		BagItemAutoSortButton:ClearAllPoints();
-		BagItemAutoSortButton:Hide();
-	end
+hooksecurefunc("ContainerFrame_Update", function(frame)
+	RB:InitContainer(frame);
 end)
 
-function ContainerFrame_IsBackpack(id)
-	return id == Enum.BagIndex.Backpack;
-end
+f:SetScript("OnEvent", function(self, event, arg1, arg2)
+	if event == "BANKFRAME_OPENED" or event == "PLAYERBANKSLOTS_CHANGED" then
+		RB:InitBank();
+	end
+end)
 
 local match = string.match
 local strsplit = strsplit
@@ -154,3 +139,4 @@ end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
 hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
+--hooksecurefunc('ToggleBackpack', Backpack_Toggle);

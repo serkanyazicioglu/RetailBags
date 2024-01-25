@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
  
-  <Button name="BagItemAutoSortButton" parent="ContainerFrame1" hidden="true">
+  <Button name="BankItemAutoSortButton" parent="BankFrame" hidden="true">
 		<Size x="21" y="21"/>
 		<NormalTexture atlas="bags-button-autosort-up"/>
 		<PushedTexture atlas="bags-button-autosort-down"/>
@@ -11,7 +11,7 @@
 		<Scripts>
 			<OnClick>
 				PlaySound(SOUNDKIT.UI_BAG_SORTING_01);
-				SortBags();
+				SortBankBags();
 			</OnClick>
 			<OnEnter>
 				GameTooltip:SetOwner(self);

@@ -15,5 +15,8 @@ embed.xml
 SortBags/SortBags.lua
 BagItemSearchBox.xml
 BagItemAutoSortButton.xml
+BankItemAutoSortButton.xml
 RetailBags.lua
+BorderHelper.lua
+ContainerFrameHelper.lua
 Options.lua

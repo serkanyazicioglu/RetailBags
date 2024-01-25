@@ -68,9 +68,20 @@ local optionsTable = {
                         SetSortBagsRightToLeft(value);
                     end,
                 },
+                DisplayItemBorders = {
+                    type = "toggle",
+                    order = 5,
+                    name = "Display item borders",
+                    desc = "Adds colored borders with item quality colors.",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.displayItemQualityBorders end,
+                    set = function(info, value)
+                        RB.DB.profile.displayItemQualityBorders = value;
+                    end,
+                },
                 ContainerScale = {
                     type = "range",
-                    order = 5,
+                    order = 6,
                     name = "Bags container scale",
                     desc = "Change size of bag containers.",
                     min = 1,
