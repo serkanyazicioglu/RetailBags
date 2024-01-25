@@ -13,6 +13,7 @@ RB.defaults = {
 		displayTooltipItemQuality = true,
 		displayTooltipItemLevel = true,
 		displayTooltipCraftingReagent = true,
+		displayMaxStackSize = true,
 		displayTooltipVendorPrice = true,
 		displayItemQualityBorders = true
 	}
@@ -118,7 +119,11 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 		end
 	end
 
-	if (RB.DB.profile.displayTooltipVendorPrice and sellPrice > 0) then
+	if (RB.DB.profile.displayMaxStackSize and stack > 1) then
+		tooltip:AddLine("Max Stack: " .. stack);
+	end
+
+	if (RB.DB.profile.displayTooltipVendorPrice and sellPrice > 0 and not MerchantFrame:IsVisible()) then
 		GameTooltip_OnTooltipAddMoney(tooltip, sellPrice * count, nil);
 	end
 

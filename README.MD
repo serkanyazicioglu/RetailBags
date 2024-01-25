@@ -8,7 +8,9 @@
 
 * Simple addon which adds search and sort functionalities on backpack on top of original WoW UI.
 
-* Adds 'Crafting Reagent' label to reagents and sell price to reagent and item tooltips.
+* Adds 'Crafting Reagent' and 'Max Stack' labels to reagent tooltips.
+
+* Adds sell price to tooltips.
 
 * Adds quality and item level labels to weapon and armor tooltips.
 

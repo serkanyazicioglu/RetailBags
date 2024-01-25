@@ -123,11 +123,21 @@ local optionsTable = {
                 DisplayCraftingReagent = {
                     type = "toggle",
                     order = 1,
-                    name = "Display crafting reagent",
+                    name = "Display crafting reagent label",
                     width = "full",
                     get = function(info) return RB.DB.profile.displayTooltipCraftingReagent end,
                     set = function(info, value)
                         RB.DB.profile.displayTooltipCraftingReagent = value
+                    end,
+                },
+                DisplayMaxStackSize = {
+                    type = "toggle",
+                    order = 1,
+                    name = "Display max. stack size for reagents",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.displayMaxStackSize end,
+                    set = function(info, value)
+                        RB.DB.profile.displayMaxStackSize = value
                     end,
                 },
                 DisplayVendorPrice = {
