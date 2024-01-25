@@ -85,8 +85,11 @@ function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 			local itemId = C_Container.GetContainerItemID(bagId, slotId);
 
 			if (itemId) then
-				local itemQuality = C_Item.GetItemQualityByID(itemId);
+				local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID = GetItemInfo(itemId);
 				if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
+					if (classID == Enum.ItemClass.Questitem) then
+						itemQuality = Enum.ItemQuality.Artifact;
+					end
 					CreateBorder(frame, slotFrameName, itemQuality);
 				end
 			elseif (frame.RetailBagsBorder) then

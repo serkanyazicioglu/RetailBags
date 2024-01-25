@@ -10,11 +10,11 @@
 
 * Adds 'Crafting Reagent' label to reagents and sell price to reagent and item tooltips.
 
-* Adds quality and item level to weapon and armor tooltips.
+* Adds quality and item level labels to weapon and armor tooltips.
 
 * By using the native UI, it doesn't break experience with other addons like ConsolePort.
 
-* Displays item quality borders
+* Displays item quality borders on bags, bank and inventory.
 
 * Ability to open all bags automatically when character pane shows up. (Useful for handhelds and controllers).
 
