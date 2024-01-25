@@ -80,22 +80,7 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 		GetItemInfo('item:' .. itemId);
 
-	local count = 1;
-	if (stack > 1) then
-		local focusedItem = GetMouseFocus();
-		if (focusedItem) then
-			count = focusedItem.count or (focusedItem.Count and focusedItem.Count:GetText()) or
-				(focusedItem.Quantity and focusedItem.Quantity:GetText())
-			--or (bn and _G[bn] and _G[bn]:GetText())
-			count = tonumber(count) or 1
-			if count <= 1 then
-				count = 1
-			end
-		end
-	end
-
 	if isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
-		--local r,g,b,hex = GetItemQualityColor(quality);
 		if (RB.DB.profile.displayTooltipItemQuality) then
 			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
 		end
@@ -109,28 +94,37 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 		if (RB.DB.profile.displayTooltipItemLevel) then
 			tooltip:AddLine("Item Level " .. itemLevel);
 		end
-
-		--print(itemName .. " " .. itemLevel);
-
-		if (tooltip.shoppingTooltips) then
-			--hooksecurefunc(tooltip.shoppingTooltips[1], "Show", GameTooltip_OnTooltipSetItem);
-			-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[1]);
-			-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[2]);
-		end
 	end
 
 	if (RB.DB.profile.displayMaxStackSize and stack > 1) then
-		tooltip:AddLine("Max Stack: " .. stack);
+		local indent = string.rep(" ", 4);
+		tooltip:AddLine("Max Stack:" .. indent .. stack);
 	end
 
-	if (RB.DB.profile.displayTooltipVendorPrice and sellPrice > 0 and not MerchantFrame:IsVisible()) then
-		GameTooltip_OnTooltipAddMoney(tooltip, sellPrice * count, nil);
-	end
-
-	--GameTooltip_CalculatePadding(tooltip);
+	--if (tooltip.shoppingTooltips and tooltip.shoppingTooltips[1]) then
+		--print("comparing");
+		--hooksecurefunc(tooltip.shoppingTooltips[1], "Show", GameTooltip_OnTooltipSetItem);
+		-- tooltip.shoppingTooltips[1]:AddLine("Test TEstesrer");
+		-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[2]);
+	--end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+
+local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
+	if RB.DB.profile.displayTooltipVendorPrice and not MerchantFrame:IsVisible() and tooltip and bag and slot then
+        local info = C_Container.GetContainerItemInfo(bag, slot)
+        if info then
+			local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent = GetItemInfo(info.itemID);
+            if (sellPrice > 0) then
+				GameTooltip_OnTooltipAddMoney(tooltip, sellPrice * info.stackCount, nil);
+				tooltip:Show();
+			end
+        end
+    end
+end
+
+hooksecurefunc(GameTooltip, 'SetBagItem', GameTooltip_OnSetBagItem);
 
 hooksecurefunc(WorldMapFrame, "Show", function(self)
 	if (CharacterFrame:IsShown()) then
@@ -156,4 +150,3 @@ end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
 hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
---hooksecurefunc('ToggleBackpack', Backpack_Toggle);
