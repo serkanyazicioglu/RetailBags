@@ -14,5 +14,9 @@
 
 * By using the native UI, it doesn't break experience with other addons like ConsolePort.
 
+* Ability to open all bags automatically when character pane opens. (Useful for handhelds/controllers).
+
+* Ability to scale bag container sizes independently from the UI scale.
+
 Sorting provided by simon_hirsig 🙏
 https://github.com/shirsig/SortBags
