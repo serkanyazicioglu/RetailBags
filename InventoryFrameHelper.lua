@@ -52,7 +52,7 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
                     if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
                         local size = nil;
                         if iterElementData[4] == INVSLOT_AMMO then
-                            size = 58;
+                            size = 38;
                         end
 
                         CreateBorder(frame, slotFrameName, itemQuality, size);
