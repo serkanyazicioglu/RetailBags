@@ -13,20 +13,9 @@ local optionsTable = {
             name = "Bag Settings",
             width = "full",
             args = {
-                DisplayBagsAutomatically = {
-                    type = "toggle",
-                    order = 1,
-                    name = "Open all bags automatically when character pane shows up",
-                    desc = "Automatically toggles all bags when character pane visibility changes.",
-                    width = "full",
-                    get = function(info) return RB.DB.profile.displayBagsWithCharacterPane end,
-                    set = function(info, value)
-                        RB.DB.profile.displayBagsWithCharacterPane = value
-                    end,
-                },
                 DisplaySearch = {
                     type = "toggle",
-                    order = 2,
+                    order = 1,
                     name = "Display search box",
                     desc = "Display a search box to filter your bags.",
                     width = "full",
@@ -42,7 +31,7 @@ local optionsTable = {
                 },
                 DisplaySortButton = {
                     type = "toggle",
-                    order = 3,
+                    order = 2,
                     name = "Display sort button",
                     desc = "Display a sort button to arrange your bags.",
                     width = "full",
@@ -58,7 +47,7 @@ local optionsTable = {
                 },
                 SortBagsRightToLeft = {
                     type = "toggle",
-                    order = 4,
+                    order = 3,
                     name = "Sort bags right to left",
                     desc = "Changes sorting direction.",
                     width = "full",
@@ -70,7 +59,7 @@ local optionsTable = {
                 },
                 DisplayItemBorders = {
                     type = "toggle",
-                    order = 5,
+                    order = 4,
                     name = "Display item borders",
                     desc = "Adds colored borders with item quality colors.",
                     width = "full",
@@ -81,7 +70,7 @@ local optionsTable = {
                 },
                 ContainerScale = {
                     type = "range",
-                    order = 6,
+                    order = 5,
                     name = "Bags container scale",
                     desc = "Change size of bag containers.",
                     min = 1,
@@ -91,6 +80,39 @@ local optionsTable = {
                     set = function(info, value)
                         RB.DB.profile.bagContainerScale = value;
                         CONTAINER_SCALE = RB.DB.profile.bagContainerScale;
+                    end,
+                },
+                DisplayBagsAutomaticallyWithCharacterPane = {
+                    type = "toggle",
+                    order = 6,
+                    name = "Open all bags automatically when character pane shows up",
+                    desc = "Automatically toggles all bags when character pane visibility changes.",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.displayBagsWithCharacterPane end,
+                    set = function(info, value)
+                        RB.DB.profile.displayBagsWithCharacterPane = value
+                    end,
+                },
+                DisplayBagsAutomaticallyWithAuctionHouse = {
+                    type = "toggle",
+                    order = 7,
+                    name = "Open all bags automatically when auction house shows up",
+                    desc = "Automatically toggles all bags when auction house visibility changes.",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.displayBagsWithAuctionPane end,
+                    set = function(info, value)
+                        RB.DB.profile.displayBagsWithAuctionPane = value
+                    end,
+                },
+                DisplayKeyringAutomaticallyWithCharacterPane = {
+                    type = "toggle",
+                    order = 8,
+                    name = "Open keyring automatically when character pane shows up",
+                    desc = "Automatically toggles keyring when character pane visibility changes.",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.displayKeyringWithCharacterPane end,
+                    set = function(info, value)
+                        RB.DB.profile.displayKeyringWithCharacterPane = value
                     end,
                 }
             },
@@ -112,7 +134,7 @@ local optionsTable = {
                 },
                 DisplayItemLevel = {
                     type = "toggle",
-                    order = 1,
+                    order = 2,
                     name = "Display item level",
                     width = "full",
                     get = function(info) return RB.DB.profile.displayTooltipItemLevel end,
@@ -122,7 +144,7 @@ local optionsTable = {
                 },
                 DisplayCraftingReagent = {
                     type = "toggle",
-                    order = 1,
+                    order = 3,
                     name = "Display crafting reagent label",
                     width = "full",
                     get = function(info) return RB.DB.profile.displayTooltipCraftingReagent end,
@@ -132,7 +154,7 @@ local optionsTable = {
                 },
                 DisplayMaxStackSize = {
                     type = "toggle",
-                    order = 1,
+                    order = 4,
                     name = "Display max. stack size for reagents",
                     width = "full",
                     get = function(info) return RB.DB.profile.displayMaxStackSize end,
@@ -142,7 +164,7 @@ local optionsTable = {
                 },
                 DisplayVendorPrice = {
                     type = "toggle",
-                    order = 1,
+                    order = 5,
                     name = "Display vendor price",
                     width = "full",
                     get = function(info) return RB.DB.profile.displayTooltipVendorPrice end,

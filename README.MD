@@ -18,7 +18,7 @@
 
 * Displays item quality borders on bags, bank and inventory.
 
-* Ability to open all bags automatically when character pane shows up. (Useful for handhelds and controllers).
+* Ability to open all bags and/or keyring automatically when character or auction pane shows up. (Useful for handhelds and controllers).
 
 * Ability to scale bag container size independently from the UI scale.
 

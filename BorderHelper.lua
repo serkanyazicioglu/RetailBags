@@ -1,11 +1,17 @@
-function CreateBorder(frame, slotFrameName, itemQuality, size)
+function CreateBorder(frame, slotFrameName, itemQuality, size, x, y)
 	if (not frame.RetailBagsBorder) then
 		if (not size) then
 			size = 43;
 		end
+		if (not x) then
+			x = 0;
+		end
+		if (not y) then
+			y = -1;
+		end
 
 		local f = CreateFrame("Frame", nil, frame, "BackdropTemplate");
-		f:SetPoint("CENTER", 0, -1);
+		f:SetPoint("CENTER", x, y);
 		f:SetSize(size, size);
 		f:SetBackdrop({
 			bgFile = "Interface/Tooltips/UI-Tooltip-Background",

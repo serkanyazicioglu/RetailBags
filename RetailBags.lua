@@ -5,7 +5,6 @@ RetailBags = RB;
 RB.defaults = {
 	profile = {
 		version = 1,
-		displayBagsWithCharacterPane = true,
 		displaySearchBox = true,
 		displaySortButton = true,
 		sortBagsRightToLeft = true,
@@ -15,7 +14,10 @@ RB.defaults = {
 		displayTooltipCraftingReagent = true,
 		displayMaxStackSize = true,
 		displayTooltipVendorPrice = true,
-		displayItemQualityBorders = true
+		displayItemQualityBorders = true,
+		displayBagsWithCharacterPane = true,
+		displayKeyringWithCharacterPane = true,
+		displayBagsWithAuctionPane = true,
 	}
 }
 
@@ -24,6 +26,8 @@ f:RegisterEvent('BANKFRAME_OPENED');
 f:RegisterEvent('PLAYERBANKSLOTS_CHANGED');
 f:RegisterEvent('INSPECT_READY');
 f:RegisterEvent('UNIT_INVENTORY_CHANGED');
+f:RegisterEvent('AUCTION_HOUSE_SHOW');
+f:RegisterEvent('AUCTION_HOUSE_CLOSED');
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -50,11 +54,12 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 		else
 			RB:InitInspectInventory();
 		end
+	elseif event == "AUCTION_HOUSE_SHOW" then
+		AuctionFrame_VisibilityCallback(true);
+	elseif event == "AUCTION_HOUSE_CLOSED" then
+		AuctionFrame_VisibilityCallback(false);
 	end
 end)
-
-local match = string.match
-local strsplit = strsplit
 
 RB.Colors = {
 	yellow    = "|cFFFFFF00",
@@ -75,10 +80,8 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 	local _, link = tooltip:GetItem()
 	if not link then return; end
 
-	local itemString = match(link, "item[%-?%d:]+")
-	local _, itemId = strsplit(":", itemString)
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
-		GetItemInfo('item:' .. itemId);
+		GetItemInfo(link);
 
 	if isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
 		if (RB.DB.profile.displayTooltipItemQuality) then
@@ -102,10 +105,10 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 	end
 
 	--if (tooltip.shoppingTooltips and tooltip.shoppingTooltips[1]) then
-		--print("comparing");
-		--hooksecurefunc(tooltip.shoppingTooltips[1], "Show", GameTooltip_OnTooltipSetItem);
-		-- tooltip.shoppingTooltips[1]:AddLine("Test TEstesrer");
-		-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[2]);
+	--print("comparing");
+	--hooksecurefunc(tooltip.shoppingTooltips[1], "Show", GameTooltip_OnTooltipSetItem);
+	-- tooltip.shoppingTooltips[1]:AddLine("Test TEstesrer");
+	-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[2]);
 	--end
 end
 
@@ -113,15 +116,16 @@ GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 
 local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
 	if RB.DB.profile.displayTooltipVendorPrice and not MerchantFrame:IsVisible() and tooltip and bag and slot then
-        local info = C_Container.GetContainerItemInfo(bag, slot)
-        if info then
-			local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent = GetItemInfo(info.itemID);
-            if (sellPrice > 0) then
+		local info = C_Container.GetContainerItemInfo(bag, slot)
+		if info then
+			local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
+				GetItemInfo(info.itemID);
+			if (sellPrice > 0) then
 				GameTooltip_OnTooltipAddMoney(tooltip, sellPrice * info.stackCount, nil);
 				tooltip:Show();
 			end
-        end
-    end
+		end
+	end
 end
 
 hooksecurefunc(GameTooltip, 'SetBagItem', GameTooltip_OnSetBagItem);
@@ -135,13 +139,24 @@ hooksecurefunc(WorldMapFrame, "Show", function(self)
 end);
 
 local function CharacterFrame_VisibilityCallback(frame)
-	if (RB.DB.profile.displayBagsWithCharacterPane) then
+	if (RB.DB.profile.displayBagsWithCharacterPane or RB.DB.profile.displayKeyringWithCharacterPane) then
 		HideUIPanel(WorldMapFrame);
 
 		if (frame:IsShown()) then
-			OpenAllBags();
+			if (RB.DB.profile.displayBagsWithCharacterPane) then
+				OpenAllBags();
+			end
+			if (RB.DB.profile.displayKeyringWithCharacterPane) then
+				CloseBag(Enum.BagIndex.Keyring);
+				ToggleBag(Enum.BagIndex.Keyring);
+			end
 		else
-			CloseAllBags();
+			if (RB.DB.profile.displayBagsWithCharacterPane) then
+				CloseAllBags();
+			end
+			if (RB.DB.profile.displayKeyringWithCharacterPane) then
+				CloseBag(Enum.BagIndex.Keyring);
+			end
 		end
 	end
 
@@ -150,3 +165,19 @@ end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
 hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
+
+function AuctionFrame_VisibilityCallback(visible)
+	HideUIPanel(WorldMapFrame);
+
+	if (RB.DB.profile.displayBagsWithAuctionPane) then
+		if (visible) then
+			OpenAllBags();
+		else
+			CloseAllBags();
+		end
+	end
+end
+
+
+hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function() RB:InitMerchantSell() end);
+hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function() RB:InitMerchantBuyBackList() end);
