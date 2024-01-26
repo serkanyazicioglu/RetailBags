@@ -1,4 +1,4 @@
-function CreateBorder(frame, slotFrameName, itemQuality, size, x, y)
+function CreateBorder(frame, itemQuality, size, x, y)
 	if (not frame.RetailBagsBorder) then
 		if (not size) then
 			size = 43;

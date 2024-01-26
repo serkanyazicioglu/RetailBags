@@ -35,8 +35,7 @@ end
 
 function RB:InitTargetInventory(targetName, slotIdentifier)
     for index, iterElementData in ipairs(ItemSlots) do
-        local slotFrameName = slotIdentifier .. iterElementData[5];
-        local frame = _G[slotFrameName]
+        local frame = _G[slotIdentifier .. iterElementData[5]]
 
         if (frame) then
             if (not RB.DB.profile.displayItemQualityBorders) then
@@ -53,36 +52,12 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
                             size = 38;
                         end
 
-                        CreateBorder(frame, slotFrameName, itemQuality, size);
+                        CreateBorder(frame, itemQuality, size);
                     end
                 elseif (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
                 end
             end
-
-
-            -- -- create border if not done yet
-            -- if (not slot.qborder) then
-            --     local height = nil;
-            --     local width = nil;
-
-            --     if charSlot == 'Ammo' then
-            --         height = 58
-            --         width = 58
-            --     end
-
-            --     slot.qborder = addon:createBorder(slotName, slot, width, height);
-            -- end
-
-            -- -- update border color
-            -- if (quality and show == 1) then
-            --     local r, g, b = GetQualityColor(quality)
-            --     slot.qborder:SetVertexColor(r, g, b);
-            --     slot.qborder:SetAlpha(ciiConfig.intensity);
-            --     slot.qborder:Show();
-            -- else
-            --     slot.qborder:Hide();
-            -- end
         end
     end
 end

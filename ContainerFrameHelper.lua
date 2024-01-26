@@ -90,7 +90,7 @@ function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 					if (classID == Enum.ItemClass.Questitem) then
 						itemQuality = Enum.ItemQuality.Artifact;
 					end
-					CreateBorder(frame, slotFrameName, itemQuality);
+					CreateBorder(frame, itemQuality);
 				end
 			elseif (frame.RetailBagsBorder) then
 				frame.RetailBagsBorder:Hide();
