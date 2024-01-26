@@ -83,25 +83,27 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 		GetItemInfo(link);
 
-	if isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
-		if (RB.DB.profile.displayTooltipItemQuality) then
-			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
+	if (itemName) then
+		if isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
+			if (RB.DB.profile.displayTooltipItemQuality) then
+				tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
+			end
+			if (RB.DB.profile.displayTooltipCraftingReagent) then
+				tooltip:AddLine(RB.Colors.blue .. "Crafting Reagent");
+			end
+		elseif itemLevel > 1 and (classId == Enum.ItemClass.Weapon or classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Projectile or classId == Enum.ItemClass.Quiver) then
+			if (RB.DB.profile.displayTooltipItemQuality) then
+				tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
+			end
+			if (RB.DB.profile.displayTooltipItemLevel) then
+				tooltip:AddLine("Item Level " .. itemLevel);
+			end
 		end
-		if (RB.DB.profile.displayTooltipCraftingReagent) then
-			tooltip:AddLine(RB.Colors.blue .. "Crafting Reagent");
-		end
-	elseif itemLevel > 1 and (classId == Enum.ItemClass.Weapon or classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Projectile or classId == Enum.ItemClass.Quiver) then
-		if (RB.DB.profile.displayTooltipItemQuality) then
-			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
-		end
-		if (RB.DB.profile.displayTooltipItemLevel) then
-			tooltip:AddLine("Item Level " .. itemLevel);
-		end
-	end
 
-	if (RB.DB.profile.displayMaxStackSize and stack > 1) then
-		local indent = string.rep(" ", 4);
-		tooltip:AddLine("Max Stack:" .. indent .. stack);
+		if (RB.DB.profile.displayMaxStackSize and stack > 1) then
+			local indent = string.rep(" ", 4);
+			tooltip:AddLine("Max Stack:" .. indent .. stack);
+		end
 	end
 
 	--if (tooltip.shoppingTooltips and tooltip.shoppingTooltips[1]) then
@@ -177,7 +179,6 @@ function AuctionFrame_VisibilityCallback(visible)
 		end
 	end
 end
-
 
 hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function() RB:InitMerchantSell() end);
 hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function() RB:InitMerchantBuyBackList() end);
