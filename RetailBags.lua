@@ -15,6 +15,7 @@ RB.defaults = {
 		displayMaxStackSize = true,
 		displayTooltipVendorPrice = true,
 		displayItemQualityBorders = true,
+		makeReagentBordersBlue = false,
 		displayBagsWithCharacterPane = true,
 		displayKeyringWithCharacterPane = true,
 		displayBagsWithAuctionPane = true,

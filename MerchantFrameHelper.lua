@@ -22,7 +22,7 @@ function InitMerchant(func, count)
             if (merchantItemLink) then
                 local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
                     GetItemInfo(merchantItemLink);
-                CreateBorder(frame, quality, 44, 0, 0);
+                CreateBorder(frame, quality, classId, 44, 0, 0);
             else
                 if (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
@@ -36,8 +36,9 @@ function RB:InitMerchantBuyBackLast()
     local link = GetBuybackItemLink(GetNumBuybackItems());
 
     if (link) then
-        local quality = link and select(3, GetItemInfo(link)) or nil;
-        CreateBorder(MerchantBuyBackItemItemButton, quality, 44, 0, 0);
+        local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
+                    GetItemInfo(link);
+        CreateBorder(MerchantBuyBackItemItemButton, quality, classId, 44, 0, 0);
     else
         if (MerchantBuyBackItemItemButton.RetailBagsBorder) then
             MerchantBuyBackItemItemButton.RetailBagsBorder:Hide();

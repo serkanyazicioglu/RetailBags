@@ -1,4 +1,6 @@
-function CreateBorder(frame, itemQuality, size, x, y)
+local RB = RetailBags
+
+function CreateBorder(frame, itemQuality, itemClass, size, x, y)
 	if (not frame.RetailBagsBorder) then
 		if (not size) then
 			size = 43;
@@ -16,12 +18,19 @@ function CreateBorder(frame, itemQuality, size, x, y)
 		f:SetBackdrop({
 			bgFile = "Interface/Tooltips/UI-Tooltip-Background",
 			edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-			edgeSize = 17
+			edgeSize = 17.5
 		});
 		f:SetBackdropColor(0, 0, 0, 0);
 		frame.RetailBagsBorder = f;
 	end
-	local color = ITEM_QUALITY_COLORS[itemQuality];
+	local color;
+	if (itemClass == Enum.ItemClass.Questitem) then
+		color = ITEM_QUALITY_COLORS[Enum.ItemQuality.Artifact];
+	elseif (itemClass == Enum.ItemClass.Tradegoods and RB.DB.profile.makeReagentBordersBlue) then
+		color = CreateColor(0.209, 0.721, 0.875);
+	else
+		color = ITEM_QUALITY_COLORS[itemQuality];
+	end
 	frame.RetailBagsBorder:SetBackdropBorderColor(color.r, color.g, color.b);
 	frame.RetailBagsBorder:Show();
 end

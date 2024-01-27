@@ -87,10 +87,7 @@ function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 			if (itemId) then
 				local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID = GetItemInfo(itemId);
 				if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-					if (classID == Enum.ItemClass.Questitem) then
-						itemQuality = Enum.ItemQuality.Artifact;
-					end
-					CreateBorder(frame, itemQuality);
+					CreateBorder(frame, itemQuality, classID);
 				end
 			elseif (frame.RetailBagsBorder) then
 				frame.RetailBagsBorder:Hide();

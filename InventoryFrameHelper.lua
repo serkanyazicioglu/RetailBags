@@ -52,7 +52,7 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
                             size = 38;
                         end
 
-                        CreateBorder(frame, itemQuality, size);
+                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor, size);
                     end
                 elseif (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
