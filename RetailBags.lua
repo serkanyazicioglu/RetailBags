@@ -17,7 +17,7 @@ RB.defaults = {
 		displayItemQualityBorders = true,
 		makeReagentBordersBlue = false,
 		displayBagsWithCharacterPane = true,
-		displayKeyringWithCharacterPane = true,
+		displayKeyringWithCharacterPane = false,
 		displayBagsWithAuctionPane = true,
 	}
 }
