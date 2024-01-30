@@ -83,19 +83,21 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 		GetItemInfo(link);
-
+		
 	if (itemName) then
-		if isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
-			if (RB.DB.profile.displayTooltipItemQuality) then
-				tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
+		if (RB.DB.profile.displayTooltipItemQuality) then
+			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
+		end
+		if classId == Enum.ItemClass.Consumable then
+			if (RB.DB.profile.displayTooltipCraftingReagent) then
+				tooltip:AddLine(RB.Colors.white .. "Consumable");
 			end
+		elseif isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
 			if (RB.DB.profile.displayTooltipCraftingReagent) then
 				tooltip:AddLine(RB.Colors.blue .. "Crafting Reagent");
 			end
 		elseif itemLevel > 1 and (classId == Enum.ItemClass.Weapon or classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Projectile or classId == Enum.ItemClass.Quiver) then
-			if (RB.DB.profile.displayTooltipItemQuality) then
-				tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
-			end
+			
 			if (RB.DB.profile.displayTooltipItemLevel) then
 				tooltip:AddLine("Item Level " .. itemLevel);
 			end

@@ -22,7 +22,17 @@ function InitMerchant(func, count)
             if (merchantItemLink) then
                 local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
                     GetItemInfo(merchantItemLink);
-                CreateBorder(frame, quality, classId, 44, 0, 0);
+
+                if quality then
+                    local color = ITEM_QUALITY_COLORS[quality];
+                    _G["MerchantItem" .. slotId].Name:SetTextColor(color.r, color.g, color.b);
+                    
+                    -- if (quality == Enum.ItemQuality.Common) then
+                    --     quality = Enum.ItemQuality.Poor;
+                    -- end
+
+                    CreateBorder(frame, quality, classId);
+                end
             else
                 if (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
@@ -37,11 +47,16 @@ function RB:InitMerchantBuyBackLast()
 
     if (link) then
         local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
-                    GetItemInfo(link);
-        CreateBorder(MerchantBuyBackItemItemButton, quality, classId, 44, 0, 0);
-    else
-        if (MerchantBuyBackItemItemButton.RetailBagsBorder) then
-            MerchantBuyBackItemItemButton.RetailBagsBorder:Hide();
+            GetItemInfo(link);
+        if quality then
+            CreateBorder(MerchantBuyBackItemItemButton, quality, classId);
+            local color = ITEM_QUALITY_COLORS[quality];
+            MerchantBuyBackItem.Name:SetTextColor(color.r, color.g, color.b);
+            return;
         end
+    end
+
+    if (MerchantBuyBackItemItemButton.RetailBagsBorder) then
+        MerchantBuyBackItemItemButton.RetailBagsBorder:Hide();
     end
 end

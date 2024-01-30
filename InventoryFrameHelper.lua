@@ -47,12 +47,7 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
 
                 if (itemQuality) then
                     if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-                        local size = nil;
-                        if iterElementData[4] == INVSLOT_AMMO then
-                            size = 38;
-                        end
-
-                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor, size);
+                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor);
                     end
                 elseif (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();
