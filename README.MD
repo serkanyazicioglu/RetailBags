@@ -16,7 +16,7 @@
 
 * By using the native UI, it doesn't break experience with other addons like ConsolePort.
 
-* Displays item quality borders on bags, bank and inventory.
+* Displays item quality borders on bags, bank, inventory and merchant panes.
 
 * Ability to open all bags and/or keyring automatically when character or auction pane shows up. (Useful for handhelds and controllers).
 
