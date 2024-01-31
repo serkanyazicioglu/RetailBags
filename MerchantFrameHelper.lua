@@ -1,15 +1,15 @@
 local RB = RetailBags
 
 function RB:InitMerchantSell()
-    InitMerchant(GetMerchantItemLink, MERCHANT_ITEMS_PER_PAGE);
+    InitMerchant(GetMerchantItemLink, MERCHANT_ITEMS_PER_PAGE, MerchantFrame.page);
     RB:InitMerchantBuyBackLast();
 end
 
 function RB:InitMerchantBuyBackList()
-    InitMerchant(GetBuybackItemLink, BUYBACK_ITEMS_PER_PAGE);
+    InitMerchant(GetBuybackItemLink, BUYBACK_ITEMS_PER_PAGE, 1);
 end
 
-function InitMerchant(func, count)
+function InitMerchant(func, count, pageIndex)
     for slotId = 1, count do
         local frame = _G['MerchantItem' .. slotId .. 'ItemButton'];
 
@@ -18,7 +18,8 @@ function InitMerchant(func, count)
                 frame.RetailBagsBorder:Hide();
             end
         else
-            local merchantItemLink = func(slotId);
+            local index = ((pageIndex - 1) * count) + slotId;
+            local merchantItemLink = func(index);
             if (merchantItemLink) then
                 local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
                     GetItemInfo(merchantItemLink);
