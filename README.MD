@@ -14,13 +14,13 @@
 
 * Adds quality and item level labels to weapon and armor tooltips.
 
-* By using the native UI, it doesn't break experience with other addons like ConsolePort.
-
 * Displays item quality borders on bags, bank, inventory and merchant panes.
 
 * Ability to open all bags and/or keyring automatically when character or auction pane shows up. (Useful for handhelds and controllers).
 
 * Ability to scale bag container size independently from the UI scale.
+
+* By using the native UI, it doesn't break experience with other addons like ConsolePort.
 
 Sorting provided by simon_hirsig 🙏
 https://github.com/shirsig/SortBags
