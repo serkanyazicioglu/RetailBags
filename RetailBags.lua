@@ -63,16 +63,18 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 end)
 
 RB.Colors = {
-	yellow    = "|cFFFFFF00",
-	white     = "|cFFFFFFFF",
-	blue      = "|cFF69CCF0",
+	yellow      = "|cFFFFFF00",
+	white       = "|cFFFFFFFF",
+	blue        = "|cFF69CCF0",
+	gray        = "|cff808080",
+	darkmagenta = "|cffA330C9",
 
-	common    = "|cFFFFFFFF",
-	uncommon  = "|cFF1EFF00",
-	rare      = "|cFF0070DD",
-	epic      = "|cFFA335EE",
-	legendary = "|cFFFF8000",
-	artifact  = "|cFFE6CC80",
+	common      = "|cFFFFFFFF",
+	uncommon    = "|cFF1EFF00",
+	rare        = "|cFF0070DD",
+	epic        = "|cFFA335EE",
+	legendary   = "|cFFFF8000",
+	artifact    = "|cFFE6CC80",
 };
 
 local function GameTooltip_OnTooltipSetItem(tooltip)
@@ -83,21 +85,20 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 
 	local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 		GetItemInfo(link);
-		
+
 	if (itemName) then
 		if (RB.DB.profile.displayTooltipItemQuality) then
 			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
 		end
 		if classId == Enum.ItemClass.Consumable then
 			if (RB.DB.profile.displayTooltipCraftingReagent) then
-				tooltip:AddLine(RB.Colors.white .. "Consumable");
+				tooltip:AddLine(RB.Colors.darkmagenta .. BAG_FILTER_CONSUMABLES);
 			end
 		elseif isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
 			if (RB.DB.profile.displayTooltipCraftingReagent) then
 				tooltip:AddLine(RB.Colors.blue .. PROFESSIONS_USED_IN_COOKING);
 			end
 		elseif itemLevel > 1 and (classId == Enum.ItemClass.Weapon or classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Projectile or classId == Enum.ItemClass.Quiver) then
-			
 			if (RB.DB.profile.displayTooltipItemLevel) then
 				tooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL .. " " .. itemLevel);
 			end
@@ -105,7 +106,7 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 
 		if (RB.DB.profile.displayMaxStackSize and stack > 1) then
 			local indent = string.rep(" ", 4);
-			tooltip:AddLine("Max Stack:" .. indent .. stack);
+			tooltip:AddLine(MAXIMUM .. " " .. AUCTION_STACK_SIZE .. ":" .. indent .. stack);
 		end
 	end
 
