@@ -122,7 +122,7 @@ GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 
 local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
 	if RB.DB.profile.displayTooltipVendorPrice and not MerchantFrame:IsVisible() and tooltip and bag and slot then
-		local info = C_Container.GetContainerItemInfo(bag, slot)
+		local info = C_Container.GetContainerItemInfo(bag, slot);
 		if info then
 			local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 				GetItemInfo(info.itemID);
