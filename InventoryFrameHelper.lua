@@ -47,7 +47,7 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
 
                 if (itemQuality) then
                     if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor);
+                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor, false);
                     end
                 elseif (frame.RetailBagsBorder) then
                     frame.RetailBagsBorder:Hide();

@@ -1,6 +1,6 @@
 local RB = RetailBags
 
-function CreateBorder(frame, itemQuality, itemClass)
+function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 	if (itemQuality == Enum.ItemQuality.Poor) then
 		if (frame.RetailBagsBorder) then
 			frame.RetailBagsBorder:Hide();
@@ -14,7 +14,12 @@ function CreateBorder(frame, itemQuality, itemClass)
 		end
 
 		if (itemClass == Enum.ItemClass.Questitem) then
-			frame.RetailBagsBorder:SetTexture(TEXTURE_ITEM_QUEST_BORDER);
+			if (isActiveQuest) then
+				frame.RetailBagsBorder:SetTexture(TEXTURE_ITEM_QUEST_BORDER);
+			else
+				frame.RetailBagsBorder:SetTexture(TEXTURE_ITEM_QUEST_BANG);
+			end
+
 			frame.RetailBagsBorder:SetVertexColor(1, 1, 1);
 		else
 			frame.RetailBagsBorder:SetTexture([[Interface\Common\WhiteIconFrame]]);

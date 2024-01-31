@@ -27,7 +27,7 @@ function InitMerchant(func, count)
                     local color = ITEM_QUALITY_COLORS[quality];
                     _G["MerchantItem" .. slotId].Name:SetTextColor(color.r, color.g, color.b);
 
-                    CreateBorder(frame, quality, classId);
+                    CreateBorder(frame, quality, classId, false);
                 end
             else
                 if (frame.RetailBagsBorder) then
@@ -46,7 +46,7 @@ function RB:InitMerchantBuyBackLast()
             local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
                 GetItemInfo(link);
             if quality then
-                CreateBorder(MerchantBuyBackItemItemButton, quality, classId);
+                CreateBorder(MerchantBuyBackItemItemButton, quality, classId, false);
                 local color = ITEM_QUALITY_COLORS[quality];
                 MerchantBuyBackItem.Name:SetTextColor(color.r, color.g, color.b);
                 return;

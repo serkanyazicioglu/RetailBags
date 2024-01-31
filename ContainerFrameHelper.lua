@@ -85,9 +85,19 @@ function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 			local itemId = C_Container.GetContainerItemID(bagId, slotId);
 
 			if (itemId) then
-				local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID = GetItemInfo(itemId);
+				local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID =
+					GetItemInfo(itemId);
+
 				if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-					CreateBorder(frame, itemQuality, classID);
+					local isActive = true;
+					if (classID == Enum.ItemClass.Questitem) then
+						local questInfo = C_Container.GetContainerItemQuestInfo(bagId, slotId);
+						if (questInfo and questInfo.questID) then
+							isActive = questInfo.isActive;
+						end
+					end
+
+					CreateBorder(frame, itemQuality, classID, isActive);
 				end
 			elseif (frame.RetailBagsBorder) then
 				frame.RetailBagsBorder:Hide();
