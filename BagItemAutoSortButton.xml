@@ -16,7 +16,6 @@
 			<OnEnter>
 				GameTooltip:SetOwner(self);
 				GameTooltip_SetTitle(GameTooltip, BAG_CLEANUP_BAGS, HIGHLIGHT_FONT_COLOR);
-				GameTooltip_AddNormalLine(GameTooltip, BAG_CLEANUP_BAGS_DESCRIPTION);
 				GameTooltip:Show();
 			</OnEnter>
 			<OnLeave function="GameTooltip_Hide"/>

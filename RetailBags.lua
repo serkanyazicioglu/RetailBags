@@ -94,12 +94,12 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 			end
 		elseif isCraftingReagent or classId == Enum.ItemClass.Tradegoods then
 			if (RB.DB.profile.displayTooltipCraftingReagent) then
-				tooltip:AddLine(RB.Colors.blue .. "Crafting Reagent");
+				tooltip:AddLine(RB.Colors.blue .. PROFESSIONS_USED_IN_COOKING);
 			end
 		elseif itemLevel > 1 and (classId == Enum.ItemClass.Weapon or classId == Enum.ItemClass.Armor or classId == Enum.ItemClass.Projectile or classId == Enum.ItemClass.Quiver) then
 			
 			if (RB.DB.profile.displayTooltipItemLevel) then
-				tooltip:AddLine("Item Level " .. itemLevel);
+				tooltip:AddLine(STAT_AVERAGE_ITEM_LEVEL .. " " .. itemLevel);
 			end
 		end
 
