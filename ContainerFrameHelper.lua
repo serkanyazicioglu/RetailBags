@@ -3,17 +3,23 @@ local RB = RetailBags
 function RB:InitContainer(frame)
 	local bagId = frame:GetID();
 	if ContainerFrame_IsBackpack(bagId) then
-		BagItemSearchBox:ClearAllPoints();
-		BagItemSearchBox:SetPoint("TOPLEFT", frame, "TOPLEFT", 50, -30)
-
 		if (RB.DB.profile.displaySearchBox) then
+			BagItemSearchBox:ClearAllPoints();
+			if (RB.DB.profile.displaySortButton) then
+				BagItemSearchBox:SetPoint("TOPLEFT", frame, "TOPLEFT", 50, -30);
+			else
+				BagItemSearchBox:SetPoint("TOPLEFT", frame, "TOPLEFT", 58, -30);
+			end
 			BagItemSearchBox:Show();
+		else
+			BagItemSearchBox:Hide();
 		end
 
-		BagItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -9, -28);
-
 		if (RB.DB.profile.displaySortButton) then
+			BagItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -9, -28);
 			BagItemAutoSortButton:Show();
+		else
+			BagItemAutoSortButton:Hide();
 		end
 	elseif BagItemSearchBox.anchorBag == frame then
 		BagItemSearchBox:ClearAllPoints();
@@ -31,10 +37,29 @@ end
 function RB:InitBank()
 	local frame = _G["BankFrame"];
 	local bagId = Enum.BagIndex.Bank;
-	BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -60, -50);
+
+	if (RB.DB.profile.displaySearchBox) then
+		BankItemSearchBox:ClearAllPoints();
+		if (RB.DB.profile.displaySortButton) then
+			BankItemSearchBox:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -73, -48);
+		else
+			BankItemSearchBox:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -60, -48);
+		end
+		BankItemSearchBox:Show();
+	else
+		BankItemSearchBox:Hide();
+	end
 
 	if (RB.DB.profile.displaySortButton) then
+		BankItemAutoSortButton:ClearAllPoints();
+		if (RB.DB.profile.displaySearchBox) then
+			BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -48, -44);
+		else
+			BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -60, -48);
+		end
 		BankItemAutoSortButton:Show();
+	else
+		BankItemAutoSortButton:Hide();
 	end
 
 	DisplayBagItemQualityBorders(bagId);

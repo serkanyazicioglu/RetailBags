@@ -2,15 +2,15 @@
 ..\FrameXML\UI.xsd">
  
   <Button name="BagItemAutoSortButton" parent="ContainerFrame1" hidden="true">
-		<Size x="21" y="21"/>
+		<Size x="20" y="20"/>
 		<NormalTexture atlas="bags-button-autosort-up"/>
 		<PushedTexture atlas="bags-button-autosort-down"/>
 		<HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD">
-			<Size x="21" y="21"/>
+			<Size x="20" y="20"/>
 		</HighlightTexture>
 		<Scripts>
 			<OnClick>
-				PlaySound(SOUNDKIT.UI_BAG_SORTING_01);
+				PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB);
 				SortBags();
 			</OnClick>
 			<OnEnter>

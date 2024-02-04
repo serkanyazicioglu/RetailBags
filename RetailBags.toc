@@ -2,7 +2,7 @@
 ## Title: Retail Bags
 ## Notes: Retail bag functionalities for Classic Era
 ## Author: Nhea
-## Version: 1.1.8
+## Version: 1.1.9
 ## SavedVariables: RetailBagsDB
 
 ## X-Website: https://guildsofwow.com/
@@ -15,6 +15,7 @@ embed.xml
 SortBags/SortBags.lua
 BagItemSearchBox.xml
 BagItemAutoSortButton.xml
+BankItemSearchBox.xml
 BankItemAutoSortButton.xml
 RetailBags.lua
 BorderHelper.lua

@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
  
-  <EditBox name="BagItemSearchBox" inherits="BagSearchBoxTemplate" parent="ContainerFrame1" letters="12" hidden="true">
-    <Size x="110" y="14"/>
+  <EditBox name="BankItemSearchBox" inherits="BagSearchBoxTemplate" parent="BankFrame" letters="12" hidden="true">
+    <Size x="88" y="13"/>
   </EditBox>
 </Ui>
