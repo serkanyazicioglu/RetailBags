@@ -109,16 +109,12 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 			tooltip:AddLine(MAXIMUM .. " " .. AUCTION_STACK_SIZE .. ":" .. indent .. stack);
 		end
 	end
-
-	--if (tooltip.shoppingTooltips and tooltip.shoppingTooltips[1]) then
-	--print("comparing");
-	--hooksecurefunc(tooltip.shoppingTooltips[1], "Show", GameTooltip_OnTooltipSetItem);
-	-- tooltip.shoppingTooltips[1]:AddLine("Test TEstesrer");
-	-- GameTooltip_OnTooltipSetItem(tooltip.shoppingTooltips[2]);
-	--end
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+ShoppingTooltip1:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+ShoppingTooltip2:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+--ItemRefTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 
 local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
 	if RB.DB.profile.displayTooltipVendorPrice and not MerchantFrame:IsVisible() and tooltip and bag and slot then
