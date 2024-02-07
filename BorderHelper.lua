@@ -1,5 +1,9 @@
 local RB = RetailBags
 
+function CreateBorderByItemId(frame, itemId)
+
+end
+
 function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 	if (itemQuality == Enum.ItemQuality.Poor) then
 		if (frame.RetailBagsBorder) then

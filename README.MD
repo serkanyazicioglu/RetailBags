@@ -14,7 +14,7 @@
 
 * Adds quality and item level labels to weapon and armor tooltips.
 
-* Displays item quality borders on bags, bank, inventory and merchant panes.
+* Displays item quality borders on bags, bank, inventory, merchant and auction panes.
 
 * Ability to open all bags and/or keyring automatically when character or auction pane shows up. (Useful for handhelds and controllers).
 

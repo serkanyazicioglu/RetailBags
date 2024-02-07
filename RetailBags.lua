@@ -2,6 +2,10 @@ local addonName, addon = ...
 local RB = LibStub("AceAddon-3.0"):NewAddon(addonName);
 RetailBags = RB;
 
+RB.consts = {
+	ENABLE_DEBUGGING = false
+};
+
 RB.defaults = {
 	profile = {
 		version = 1,
@@ -22,6 +26,8 @@ RB.defaults = {
 	}
 }
 
+local Core = {};
+RB.Core = Core;
 local f = CreateFrame("Frame");
 f:RegisterEvent('BANKFRAME_OPENED');
 f:RegisterEvent('PLAYERBANKSLOTS_CHANGED');
@@ -29,6 +35,9 @@ f:RegisterEvent('INSPECT_READY');
 f:RegisterEvent('UNIT_INVENTORY_CHANGED');
 f:RegisterEvent('AUCTION_HOUSE_SHOW');
 f:RegisterEvent('AUCTION_HOUSE_CLOSED');
+f:RegisterEvent('AUCTION_ITEM_LIST_UPDATE');
+f:RegisterEvent('AUCTION_OWNED_LIST_UPDATE');
+f:RegisterEvent('AUCTION_BIDDER_LIST_UPDATE');
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -45,6 +54,7 @@ hooksecurefunc("ContainerFrame_Update", function(frame)
 end)
 
 f:SetScript("OnEvent", function(self, event, arg1, arg2)
+	Core:Debug(event);
 	if event == "BANKFRAME_OPENED" or event == "PLAYERBANKSLOTS_CHANGED" then
 		RB:InitBank();
 	elseif event == "INSPECT_READY" then
@@ -59,6 +69,12 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 		AuctionFrame_VisibilityCallback(true);
 	elseif event == "AUCTION_HOUSE_CLOSED" then
 		AuctionFrame_VisibilityCallback(false);
+	elseif event == "AUCTION_ITEM_LIST_UPDATE" then
+		RB:InitAuctionBrowseItems();
+	elseif event == "AUCTION_OWNED_LIST_UPDATE" then
+		RB:InitAuctionOwnedItems();
+	elseif event == "AUCTION_BIDDER_LIST_UPDATE" then
+		RB:InitAuctionBidItems();
 	end
 end)
 
@@ -87,6 +103,8 @@ local function GameTooltip_OnTooltipSetItem(tooltip)
 		GetItemInfo(link);
 
 	if (itemName) then
+		--Core:Debug(GetMouseFocus():GetName());
+
 		if (RB.DB.profile.displayTooltipItemQuality) then
 			tooltip:AddLine(RB.Colors.white .. _G["ITEM_QUALITY" .. quality .. "_DESC"]);
 		end
@@ -180,5 +198,38 @@ function AuctionFrame_VisibilityCallback(visible)
 	end
 end
 
-hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function() RB:InitMerchantSell() end);
-hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function() RB:InitMerchantBuyBackList() end);
+hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function() RB:InitMerchantSell(); end);
+hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function() RB:InitMerchantBuyBackList(); end);
+
+hooksecurefunc('FauxScrollFrame_OnVerticalScroll', function(frame)
+	if (frame == BrowseScrollFrame) then
+		RB:InitAuctionBrowseItems();
+	end
+end);
+
+function Core:Debug(msg)
+	if (msg and RB.consts.ENABLE_DEBUGGING) then
+		Core:PrintMessage(" [DEBUG] " .. msg);
+	end
+end
+
+function Core:PrintMessage(msg)
+	print(Core:GetColoredStringWithBranding("ffcc00", msg));
+end
+
+function Core:PrintSuccessMessage(msg)
+	print(Core:GetColoredStringWithBranding("00ff00", msg));
+end
+
+function Core:PrintErrorMessage(msg)
+	print(Core:GetColoredStringWithBranding("ff0000", msg));
+end
+
+function Core:GetColoredStringWithBranding(color, msg)
+	return Core:GetColoredString("00ff00", addonName .. ": ") .. Core:GetColoredString(color, msg);
+end
+
+function Core:GetColoredString(color, msg)
+	local colorString = "|cff";
+	return colorString .. color .. msg .. "|r";
+end
