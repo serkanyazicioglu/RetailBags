@@ -21,7 +21,7 @@ function RB:InitContainer(frame)
 		else
 			BagItemAutoSortButton:Hide();
 		end
-	elseif not IsBagOpen(0) or BagItemSearchBox.anchorBag == frame then
+	elseif not IsBagOpen(Enum.BagIndex.Backpack) or BagItemSearchBox.anchorBag == frame then
 		BagItemSearchBox:ClearAllPoints();
 		BagItemSearchBox:Hide();
 		BagItemSearchBox.anchorBag = nil;
