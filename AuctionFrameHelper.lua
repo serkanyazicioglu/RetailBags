@@ -1,22 +1,28 @@
 local RB = RetailBags
 
 function RB:InitAuctionBrowseItems()
-    local type = "list";
-    local frameName = "BrowseButton";
-    local offset = FauxScrollFrame_GetOffset(BrowseScrollFrame);
-    RB:InitAuctionItems(type, frameName, offset);
+    if (AuctionFrameBrowse:IsVisible()) then
+        local type = "list";
+        local frameName = "BrowseButton";
+        local offset = FauxScrollFrame_GetOffset(BrowseScrollFrame);
+        RB:InitAuctionItems(type, frameName, offset);
+    end
 end
 
 function RB:InitAuctionOwnedItems()
-    local type = "owner";
-    local frameName = "AuctionsButton";
-    RB:InitAuctionItems(type, frameName, 0);
+    if (AuctionFrameAuctions:IsVisible()) then
+        local type = "owner";
+        local frameName = "AuctionsButton";
+        RB:InitAuctionItems(type, frameName, 0);
+    end
 end
 
 function RB:InitAuctionBidItems()
-    local type = "bidder";
-    local frameName = "BidButton";
-    RB:InitAuctionItems(type, frameName, 0);
+    if (AuctionFrameBid:IsVisible()) then
+        local type = "bidder";
+        local frameName = "BidButton";
+        RB:InitAuctionItems(type, frameName, 0);
+    end
 end
 
 function RB:InitAuctionItems(type, frameName, offset)

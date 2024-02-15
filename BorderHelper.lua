@@ -33,7 +33,10 @@ function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 			else
 				color = BAG_ITEM_QUALITY_COLORS[itemQuality];
 			end
-			frame.RetailBagsBorder:SetVertexColor(color.r, color.g, color.b);
+
+			if (color) then
+				frame.RetailBagsBorder:SetVertexColor(color.r, color.g, color.b);
+			end
 		end
 
 		frame.RetailBagsBorder:Show();

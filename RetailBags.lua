@@ -140,7 +140,7 @@ local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
 		if info then
 			local itemName, _, quality, itemLevel, _, _, _, stack, slot, _, sellPrice, classId, subClassId, bindType, expacID, setID, isCraftingReagent =
 				GetItemInfo(info.itemID);
-			if (sellPrice > 0) then
+			if (itemName and sellPrice and sellPrice > 0) then
 				GameTooltip_OnTooltipAddMoney(tooltip, sellPrice * info.stackCount, nil);
 				tooltip:Show();
 			end
