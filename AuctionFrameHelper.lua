@@ -10,7 +10,7 @@ function RB:InitAuctionBrowseItems()
 end
 
 function RB:InitAuctionOwnedItems()
-    if (AuctionFrameAuctions:IsVisible()) then
+    if (AuctionFrame:IsVisible()) then
         local type = "owner";
         local frameName = "AuctionsButton";
         RB:InitAuctionItems(type, frameName, 0);
@@ -18,7 +18,7 @@ function RB:InitAuctionOwnedItems()
 end
 
 function RB:InitAuctionBidItems()
-    if (AuctionFrameBid:IsVisible()) then
+    if (AuctionFrame:IsVisible()) then
         local type = "bidder";
         local frameName = "BidButton";
         RB:InitAuctionItems(type, frameName, 0);
