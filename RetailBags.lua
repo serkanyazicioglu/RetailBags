@@ -23,6 +23,7 @@ RB.defaults = {
 		displayBagsWithCharacterPane = true,
 		displayKeyringWithCharacterPane = false,
 		displayBagsWithAuctionPane = true,
+		makeConsumableBordersColored = false,
 	}
 }
 
@@ -132,7 +133,7 @@ end
 GameTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 ShoppingTooltip1:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 ShoppingTooltip2:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
---ItemRefTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
+ItemRefTooltip:HookScript("OnTooltipSetItem", GameTooltip_OnTooltipSetItem);
 
 local function GameTooltip_OnSetBagItem(tooltip, bag, slot)
 	if RB.DB.profile.displayTooltipVendorPrice and not MerchantFrame:IsVisible() and tooltip and bag and slot then

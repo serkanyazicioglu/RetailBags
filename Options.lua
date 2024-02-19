@@ -71,17 +71,28 @@ local optionsTable = {
                 MakeReagentBorderBlue = {
                     type = "toggle",
                     order = 5,
-                    name = "Show reagent borders as blue colored",
-                    desc = "Instead of item quality color show all reagents with blue border.",
+                    name = "Show reagent borders as colored",
+                    desc = "Instead of item quality color show all reagents with colored border.",
                     width = "full",
                     get = function(info) return RB.DB.profile.makeReagentBordersBlue end,
                     set = function(info, value)
                         RB.DB.profile.makeReagentBordersBlue = value;
                     end,
                 },
+                MakeConsumableBorderColored = {
+                    type = "toggle",
+                    order = 6,
+                    name = "Show consumable item borders as colored",
+                    desc = "Instead of item quality color show all consumables with colored border.",
+                    width = "full",
+                    get = function(info) return RB.DB.profile.makeConsumableBordersColored end,
+                    set = function(info, value)
+                        RB.DB.profile.makeConsumableBordersColored = value;
+                    end,
+                },
                 ContainerScale = {
                     type = "range",
-                    order = 6,
+                    order = 7,
                     name = "Bags container scale",
                     desc = "Change size of bag containers.",
                     min = 1,
@@ -95,7 +106,7 @@ local optionsTable = {
                 },
                 DisplayBagsAutomaticallyWithCharacterPane = {
                     type = "toggle",
-                    order = 7,
+                    order = 8,
                     name = "Open all bags automatically when character pane shows up",
                     desc = "Automatically toggles all bags when character pane visibility changes.",
                     width = "full",
@@ -106,7 +117,7 @@ local optionsTable = {
                 },
                 DisplayBagsAutomaticallyWithAuctionHouse = {
                     type = "toggle",
-                    order = 8,
+                    order = 9,
                     name = "Open all bags automatically when auction house shows up",
                     desc = "Automatically toggles all bags when auction house visibility changes.",
                     width = "full",
@@ -117,7 +128,7 @@ local optionsTable = {
                 },
                 DisplayKeyringAutomaticallyWithCharacterPane = {
                     type = "toggle",
-                    order = 9,
+                    order = 10,
                     name = "Open keyring automatically when character pane shows up",
                     desc = "Automatically toggles keyring when character pane visibility changes.",
                     width = "full",

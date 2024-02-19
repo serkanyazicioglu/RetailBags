@@ -30,6 +30,8 @@ function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 			local color;
 			if (itemClass == Enum.ItemClass.Tradegoods and RB.DB.profile.makeReagentBordersBlue) then
 				color = CreateColor(0.300, 0.780, 0.875);
+			elseif (itemClass == Enum.ItemClass.Consumable and RB.DB.profile.makeConsumableBordersColored) then
+				color = CreateColor(0.700, 0.280, 0.575);
 			else
 				color = BAG_ITEM_QUALITY_COLORS[itemQuality];
 			end
