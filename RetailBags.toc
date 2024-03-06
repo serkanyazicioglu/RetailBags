@@ -23,4 +23,5 @@ InventoryFrameHelper.lua
 ContainerFrameHelper.lua
 AuctionFrameHelper.lua
 MerchantFrameHelper.lua
+LootFrameHelper.lua
 Options.lua

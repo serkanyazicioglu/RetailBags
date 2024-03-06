@@ -1,9 +1,5 @@
 local RB = RetailBags
 
-function CreateBorderByItemId(frame, itemId)
-
-end
-
 function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 	if (itemQuality == Enum.ItemQuality.Poor) then
 		if (frame.RetailBagsBorder) then
@@ -37,6 +33,7 @@ function CreateBorder(frame, itemQuality, itemClass, isActiveQuest)
 			end
 
 			if (color) then
+				RB.Core:Debug("Adding border " .. color.r .. " " .. color.g .. " " .. color.b);
 				frame.RetailBagsBorder:SetVertexColor(color.r, color.g, color.b);
 			end
 		end

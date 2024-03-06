@@ -39,6 +39,9 @@ f:RegisterEvent('AUCTION_HOUSE_CLOSED');
 f:RegisterEvent('AUCTION_ITEM_LIST_UPDATE');
 f:RegisterEvent('AUCTION_OWNED_LIST_UPDATE');
 f:RegisterEvent('AUCTION_BIDDER_LIST_UPDATE');
+f:RegisterEvent("LOOT_OPENED");
+f:RegisterEvent("LOOT_SLOT_CLEARED");
+f:RegisterEvent("LOOT_SLOT_CHANGED");
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -76,6 +79,8 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 		RB:InitAuctionOwnedItems();
 	elseif event == "AUCTION_BIDDER_LIST_UPDATE" then
 		RB:InitAuctionBidItems();
+	elseif event == "LOOT_OPENED" or event == "LOOT_SLOT_CHANGED" or event == "LOOT_SLOT_CLEARED" then
+		RB:InitLootFrame();
 	end
 end)
 
@@ -186,6 +191,7 @@ end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
 hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
+
 
 function AuctionFrame_VisibilityCallback(visible)
 	HideUIPanel(WorldMapFrame);
