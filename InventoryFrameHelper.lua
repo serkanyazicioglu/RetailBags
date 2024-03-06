@@ -37,22 +37,25 @@ function RB:InitTargetInventory(targetName, slotIdentifier)
     for index, iterElementData in ipairs(ItemSlots) do
         local frame = _G[slotIdentifier .. iterElementData[5]]
 
-        if (frame) then
-            if (not RB.DB.profile.displayItemQualityBorders) then
-                if (frame.RetailBagsBorder) then
-                    frame.RetailBagsBorder:Hide();
-                end
-            else
-                local itemQuality = GetInventoryItemQuality(targetName, iterElementData[3]);
+        RB:InitInventorySlot(frame, targetName, iterElementData[3]);
+    end
+end
 
-                if (itemQuality) then
-                    if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-                        CreateBorder(frame, itemQuality, Enum.ItemClass.Armor, false);
-                    end
-                elseif (frame.RetailBagsBorder) then
-                    frame.RetailBagsBorder:Hide();
-                end
-            end
+function RB:InitInventorySlot(frame, targetName, slotId)
+    if (not frame) then
+        return;
+    end
+
+    if (RB.DB.profile.displayItemQualityBorders) then
+        local itemQuality = GetInventoryItemQuality(targetName, slotId);
+
+        if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
+            CreateBorder(frame, itemQuality, Enum.ItemClass.Armor, false);
+            return;
         end
+    end
+
+    if (frame.RetailBagsBorder) then
+        frame.RetailBagsBorder:Hide();
     end
 end

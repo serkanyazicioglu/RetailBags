@@ -101,32 +101,33 @@ end
 
 function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 	local frame = _G[slotFrameName];
-	if (frame) then
-		if (not RB.DB.profile.displayItemQualityBorders) then
-			if (frame.RetailBagsBorder) then
-				frame.RetailBagsBorder:Hide();
-			end
-		else
-			local itemId = C_Container.GetContainerItemID(bagId, slotId);
+	if (not frame) then
+		return;
+	end
 
-			if (itemId) then
-				local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID =
-					GetItemInfo(itemId);
+	if (RB.DB.profile.displayItemQualityBorders) then
+		local itemId = C_Container.GetContainerItemID(bagId, slotId);
 
-				if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
-					local isActive = true;
-					if (classID == Enum.ItemClass.Questitem) then
-						local questInfo = C_Container.GetContainerItemQuestInfo(bagId, slotId);
-						if (questInfo and questInfo.questID) then
-							isActive = questInfo.isActive;
-						end
+		if (itemId) then
+			local itemName, itemLink, itemQuality, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount, itemEquipLoc, itemTexture, sellPrice, classID, subclassID =
+				GetItemInfo(itemId);
+
+			if itemQuality and itemQuality ~= Enum.ItemQuality.Poor then
+				local isActive = true;
+				if (classID == Enum.ItemClass.Questitem) then
+					local questInfo = C_Container.GetContainerItemQuestInfo(bagId, slotId);
+					if (questInfo and questInfo.questID) then
+						isActive = questInfo.isActive;
 					end
-
-					CreateBorder(frame, itemQuality, classID, isActive);
 				end
-			elseif (frame.RetailBagsBorder) then
-				frame.RetailBagsBorder:Hide();
+
+				CreateBorder(frame, itemQuality, classID, isActive);
+				return;
 			end
 		end
+	end
+
+	if (frame.RetailBagsBorder) then
+		frame.RetailBagsBorder:Hide();
 	end
 end

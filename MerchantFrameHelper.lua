@@ -13,11 +13,7 @@ function InitMerchant(func, count, pageIndex)
     for slotId = 1, count do
         local frame = _G['MerchantItem' .. slotId .. 'ItemButton'];
 
-        if (not RB.DB.profile.displayItemQualityBorders) then
-            if (frame.RetailBagsBorder) then
-                frame.RetailBagsBorder:Hide();
-            end
-        else
+        if (RB.DB.profile.displayItemQualityBorders) then
             local index = ((pageIndex - 1) * count) + slotId;
             local merchantItemLink = func(index);
             if (merchantItemLink) then
@@ -29,12 +25,13 @@ function InitMerchant(func, count, pageIndex)
                     _G["MerchantItem" .. slotId].Name:SetTextColor(color.r, color.g, color.b);
 
                     CreateBorder(frame, quality, classId, false);
-                end
-            else
-                if (frame.RetailBagsBorder) then
-                    frame.RetailBagsBorder:Hide();
+                    return;
                 end
             end
+        end
+
+        if (frame.RetailBagsBorder) then
+            frame.RetailBagsBorder:Hide();
         end
     end
 end
@@ -54,7 +51,7 @@ function RB:InitMerchantBuyBackLast()
             end
         end
     end
-    
+
     if (MerchantBuyBackItemItemButton.RetailBagsBorder) then
         MerchantBuyBackItemItemButton.RetailBagsBorder:Hide();
     end
