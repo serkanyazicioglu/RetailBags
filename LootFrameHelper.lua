@@ -1,18 +1,20 @@
 local RB = RetailBags
 
 function RB:InitLootFrame()
-    RB.Core:Debug("LootFrame shown " .. LootFrame.numLootItems .. " " .. LOOTFRAME_NUMBUTTONS);
+    if (LootFrame.numLootItems) then
+        RB.Core:Debug("LootFrame shown " .. LootFrame.numLootItems .. " " .. LOOTFRAME_NUMBUTTONS);
 
-    if (LootFrame.numLootItems > 0) then
-        local numLootItems = LootFrame.numLootItems;
+        if (LootFrame.numLootItems > 0) then
+            local numLootItems = LootFrame.numLootItems;
 
-        local numLootToShow = LOOTFRAME_NUMBUTTONS;
-        if (numLootItems > LOOTFRAME_NUMBUTTONS) then
-            numLootToShow = numLootToShow - 1;
-        end
+            local numLootToShow = LOOTFRAME_NUMBUTTONS;
+            if (numLootItems > LOOTFRAME_NUMBUTTONS) then
+                numLootToShow = numLootToShow - 1;
+            end
 
-        for index = 1, LOOTFRAME_NUMBUTTONS do
-            RB:LootFrame_UpdateButton(numLootToShow, index);
+            for index = 1, LOOTFRAME_NUMBUTTONS do
+                RB:LootFrame_UpdateButton(numLootToShow, index);
+            end
         end
     end
 end
