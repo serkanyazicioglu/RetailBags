@@ -42,6 +42,9 @@ f:RegisterEvent('AUCTION_BIDDER_LIST_UPDATE');
 f:RegisterEvent("LOOT_OPENED");
 f:RegisterEvent("LOOT_SLOT_CLEARED");
 f:RegisterEvent("LOOT_SLOT_CHANGED");
+f:RegisterEvent("QUEST_ACCEPTED");
+f:RegisterEvent("QUEST_REMOVED");
+f:RegisterEvent("QUEST_COMPLETE");
 
 function RB:OnInitialize()
 	self.GUI = LibStub("AceGUI-3.0")
@@ -81,6 +84,17 @@ f:SetScript("OnEvent", function(self, event, arg1, arg2)
 		RB:InitAuctionBidItems();
 	elseif event == "LOOT_OPENED" or event == "LOOT_SLOT_CHANGED" or event == "LOOT_SLOT_CLEARED" then
 		RB:InitLootFrame();
+	elseif event == "QUEST_ACCEPTED" or event == "QUEST_REMOVED" or event == "QUEST_COMPLETE" then
+		if (IsBagOpen(Enum.BagIndex.Bank)) then
+			RB:InitBank();
+		end
+
+		for i = 1, NUM_CONTAINER_FRAMES, 1 do
+			local containerFrame = _G["ContainerFrame" .. i];
+			if (containerFrame:IsShown()) then
+				RB:InitContainer(containerFrame);
+			end
+		end
 	end
 end)
 
