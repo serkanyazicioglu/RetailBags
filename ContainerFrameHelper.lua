@@ -40,11 +40,23 @@ function RB:InitBank()
 
 	if (RB.DB.profile.displaySearchBox) then
 		BankItemSearchBox:ClearAllPoints();
+
+		local right = 0;
 		if (RB.DB.profile.displaySortButton) then
-			BankItemSearchBox:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -73, -48);
+			if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+				right = -73;
+			else
+				right = -36;
+			end
 		else
-			BankItemSearchBox:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -60, -48);
+			if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+				right = -60;
+			else
+				right = -10;
+			end
 		end
+
+		BankItemSearchBox:SetPoint("TOPRIGHT", frame, "TOPRIGHT", right, -48);
 		BankItemSearchBox:Show();
 	else
 		BankItemSearchBox:Hide();
@@ -52,11 +64,26 @@ function RB:InitBank()
 
 	if (RB.DB.profile.displaySortButton) then
 		BankItemAutoSortButton:ClearAllPoints();
+		local right = 0;
+		local top = -48;
+
 		if (RB.DB.profile.displaySearchBox) then
-			BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -48, -44);
+			top = -44;
+
+			if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+				right = -48;
+			else
+				right = -8;
+			end
 		else
-			BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -60, -48);
+			if (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC) then
+				right = -60;
+			else
+				right = -10;
+			end
 		end
+
+		BankItemAutoSortButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", right, top);
 		BankItemAutoSortButton:Show();
 	else
 		BankItemAutoSortButton:Hide();

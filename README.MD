@@ -22,7 +22,5 @@
 
 * By using the native UI, it doesn't break experience with other addons like ConsolePort.
 
-Only Classic Era is supported at the moment.
-
 Sorting provided by simon_hirsig 🙏
 https://github.com/shirsig/SortBags
