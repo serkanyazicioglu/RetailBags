@@ -1,8 +1,8 @@
-## Interface: 11502
+## Interface: 11507
 ## Title: Retail Bags
 ## Notes: Retail bag functionalities for Classic Era
 ## Author: Nhea
-## Version: 1.2.2
+## Version: 1.2.3
 ## SavedVariables: RetailBagsDB
 
 ## X-Website: https://guildsofwow.com/

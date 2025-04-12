@@ -29,9 +29,8 @@ function RB:InitContainer(frame)
 		BagItemAutoSortButton:Hide();
 	end
 
-	if (IsBagOpen(bagId)) then
-		DisplayBagItemQualityBorders(bagId);
-	end
+	DisplayBagItemQualityBorders(frame, bagId);
+	RB.Core:Debug("InitContainer " .. bagId .. " " .. frame:GetName() .. " " .. frame:GetID());
 end
 
 function RB:InitBank()
@@ -89,39 +88,27 @@ function RB:InitBank()
 		BankItemAutoSortButton:Hide();
 	end
 
-	DisplayBagItemQualityBorders(bagId);
+	DisplayBagItemQualityBorders(frame, bagId);
 end
 
 function ContainerFrame_IsBackpack(id)
 	return id == Enum.BagIndex.Backpack;
 end
 
-function GetContainerItemFrameName(bagId, containerNumSlots, slotId)
+function GetContainerItemFrameName(bagId, frame, containerNumSlots, slotId)
 	if (bagId == Enum.BagIndex.Bank) then
 		return "BankFrameItem" .. slotId;
 	else
 		local slotFrameId = containerNumSlots + 1 - slotId;
-		return "ContainerFrame" .. bagId + 1 .. "Item" .. slotFrameId;
+		return frame:GetName() .. "Item" .. slotFrameId;
 	end
 end
 
-function ContainerFrame_GetContainerNumSlots(bagId)
-	local currentNumSlots = C_Container.GetContainerNumSlots(bagId);
-	local maxNumSlots = currentNumSlots;
-
-	if bagId == Enum.BagIndex.Backpack and not IsAccountSecured() then
-		-- If your account isn't secured then the max number of slots you can have in your backpack is 4 more than your current
-		maxNumSlots = currentNumSlots + 4;
-	end
-
-	return maxNumSlots, currentNumSlots;
-end
-
-function DisplayBagItemQualityBorders(bagId)
+function DisplayBagItemQualityBorders(frame, bagId)
 	local containerNumSlots = ContainerFrame_GetContainerNumSlots(bagId);
 
 	for slotId = 1, containerNumSlots do
-		local slotFrameName = GetContainerItemFrameName(bagId, containerNumSlots, slotId);
+		local slotFrameName = GetContainerItemFrameName(bagId, frame, containerNumSlots, slotId);
 		DisplayBagItemSlotBorder(bagId, slotFrameName, slotId);
 	end
 end
@@ -132,7 +119,7 @@ function DisplayBagItemSlotBorder(bagId, slotFrameName, slotId)
 		return;
 	end
 
-	if (RB.DB.profile.displayItemQualityBorders) then
+	if (RB.DB.profile.displayItemQualityBorders and IsBagOpen(bagId)) then
 		local itemId = C_Container.GetContainerItemID(bagId, slotId);
 
 		if (itemId) then

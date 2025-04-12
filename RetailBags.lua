@@ -186,7 +186,7 @@ local function CharacterFrame_VisibilityCallback(frame)
 			if (RB.DB.profile.displayBagsWithCharacterPane) then
 				OpenAllBags();
 			end
-			if (RB.DB.profile.displayKeyringWithCharacterPane) then
+			if (IsKeyRingEnabled() and RB.DB.profile.displayKeyringWithCharacterPane) then
 				CloseBag(Enum.BagIndex.Keyring);
 				ToggleBag(Enum.BagIndex.Keyring);
 			end
@@ -205,7 +205,6 @@ end
 
 hooksecurefunc(CharacterFrame, "Hide", CharacterFrame_VisibilityCallback);
 hooksecurefunc(CharacterFrame, "Show", CharacterFrame_VisibilityCallback);
-
 
 function AuctionFrame_VisibilityCallback(visible)
 	HideUIPanel(WorldMapFrame);
